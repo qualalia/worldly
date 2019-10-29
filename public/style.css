@@ -4,30 +4,49 @@ body {
 }
 
 svg {
-    border: 2px dashed yellowgreen;
     width: 100%;
     vertical-align: top;
     height: 100%;
 }
 
+label {
+    margin: 1rem;
+}
+
 .svg-container {
-    margin: 2rem;
+    height: 40rem;
 }
 
 .body-container {
     display: flex;
     flex-direction: column;
+    border: 2px dashed yellowgreen;
 }
 
 .option {
-    border: 2px dashed white;
-    padding: 2rem;
+//    border: 1px solid white;
+    padding: 1rem;
+    padding-right: 3rem;
+    margin-right: 1rem;
     display: flex;
-    justify-items: space-around;
+    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    max-width: 20rem;
+}
+
+.demo {
+    max-width: 10vw;
+    height: 10rem;
+    border: none;
 }
 
 #options-bar {
-    display: flex;
+    position: absolute;
+    top: 75%;
+    left: 15%;
     border: 2px solid orange;
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
 }

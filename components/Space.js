@@ -27,8 +27,8 @@ export default class Space extends React.Component {
   handleMouseMove = (evt) => {
     const dx = (evt.clientX - 10) - this.state.x;
     this.setState({
-      x: evt.clientX - 40,// both - 10 with no margins
-      y: evt.clientY - 35,
+      x: evt.clientX - 10,// both -10 with no margins, (-45, -30) with 2rem
+      y: evt.clientY - 10,
       r: this.props.size,
     });
   }
