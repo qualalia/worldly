@@ -5,7 +5,7 @@ export default class Space extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: 0,
+      x: -20,
       y: 0,
       r: props.size,
       t: 0,
