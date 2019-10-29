@@ -30,8 +30,10 @@ const Options = (props) => {
 	  )}
 	</select>
       </div>
-      <div className="demo">
-	{(shapeValue === 'circle') ? <Circle x={50} y={50} r={sizeValue} /> : <Star />}
+      <div className="option">
+	<div className="demo">
+	  {(shapeValue === 'circle') ? <Circle x={60} y={70} r={sizeValue} /> : <Star />}
+	</div>
       </div>
     </div>
   )
