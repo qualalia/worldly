@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Circle = (props) => {
-  const { x, y } = props;
+  const { x, y, r } = props;
   return (
     <svg>
-      <circle cx={x} cy={y} r={10} fill="yellow" />
+      <circle cx={x} cy={y} r={props.r || 10} fill="yellow" />
     </svg>
   )
 };
