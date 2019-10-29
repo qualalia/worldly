@@ -1,17 +1,13 @@
 import React from 'react';
+import Space from './Space.js';
+import Options from './Options.js';
 
 class Main extends React.Component {
-  componentDidMount() {
-    const canvas = this.refs.canvas;
-    const ctx = canvas.getContext("2d");
-    ctx.fillStyle = "green";
-    ctx.fillRect(0,0,500,500);
-  }
-  // mouseMove in here?
   render() {
     return (
-      <div>
-	<canvas ref="canvas" width={500} height={500} />
+      <div className="body-container">
+	<Space />
+	<Options /> {/* todo: share some props between Space and Options */}
       </div>
     )
   }
