@@ -22,8 +22,11 @@ const Options = (props) => {
 	<label htmlFor="shape">Shape</label>
 	<select name="shape"
 		onChange={handleChange}>
-	  {SHAPES.map(shape =>
-	  (<option value={`${shape}`}>{shape}</option>)
+	  {SHAPES.map((shape,index) =>
+	    (<option key={index}
+		     value={`${shape}`}>
+	      {shape}
+	    </option>)
 	  )}
 	</select>
       </div>
