@@ -3,14 +3,27 @@ import Space from './Space.js';
 import Options from './Options.js';
 
 class Main extends React.Component {
-  handleSubmit(e) {
-    e.preventDefault();
+  constructor() {
+    super();
+    this.state = {
+      size: 10,
+      shape: 'circle',
+    }
+  }
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
   render() {
+    const { size, shape } = this.state;
     return (
       <div className="body-container">
-	<Space />
-	<Options /> {/* todo: share some props between Space and Options */}
+	<Space shape={shape}
+	       size={size}
+	/>
+	<Options handleChange={this.handleChange}
+		 sizeValue={size}
+		 shapeValue={shape}
+	/>
       </div>
     )
   }
