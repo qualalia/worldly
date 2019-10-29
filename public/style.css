@@ -1,0 +1,33 @@
+body {
+    background: green;
+    max-width: 100vw;
+}
+
+svg {
+    border: 2px dashed yellowgreen;
+    width: 100%;
+    vertical-align: top;
+    height: 100%;
+}
+
+.svg-container {
+    margin: 2rem;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.option {
+    border: 2px dashed white;
+    padding: 2rem;
+    display: flex;
+    justify-items: space-around;
+    align-items: center;
+}
+
+#options-bar {
+    display: flex;
+    border: 2px solid orange;
+}
