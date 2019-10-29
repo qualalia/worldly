@@ -2,15 +2,17 @@ import React from 'react';
 import Circle from './Circle.js';
 
 export default class Space extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       x: 0,
       y: 0,
+      r: props.size,
       t: 0,
       dx: 0,
       dy: 0,
       circles: [],
+      stars: [],
     };
   }
   componentDidMount() {
@@ -27,11 +29,12 @@ export default class Space extends React.Component {
     this.setState({
       x: evt.clientX - 40,// both - 10 with no margins
       y: evt.clientY - 35,
+      r: this.props.size,
     });
   }
   handleClick = (evt) => {
     this.setState({
-      circles: [...this.state.circles, {x: this.state.x, y: this.state.y}],
+      circles: [...this.state.circles, {x: this.state.x, y: this.state.y, r: this.state.r }],
     });
   }
   tick() {
@@ -40,18 +43,19 @@ export default class Space extends React.Component {
     });
   }
   render() {
-    const { x, y, circles } = this.state;
+    const { x, y, r, circles } = this.state;
     return (
       <div className="svg-container"
 	   onMouseMove={this.handleMouseMove}
 	   onClick={this.handleClick}
       >
 	<svg>
-	  <circle cx={x} cy={y} r={10} fill="orange" />
+	  <circle cx={x} cy={y} r={r} fill="orange" />
 	  {circles.map((circle,index) =>
 	    <Circle key={index}
 		    x={circle.x}
 		    y={circle.y}
+		    r={circle.r}
 	    />
 	  )}
 	</svg>
