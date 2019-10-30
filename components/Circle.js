@@ -9,11 +9,11 @@ const Circle = (props) => {
     <svg>
       <defs>
 	<radialGradient id="RadialGradient1">
-          <stop offset="30%" stopColor="yellow"/>
-          <stop offset="500%" stopColor="transparent"/>
+          <stop offset="30%" stopColor="midnightblue" />
+          <stop offset="100%" stopColor="transparent" />
 	</radialGradient>
       </defs>
-      <circle cx={x} cy={y} r={r || 10} fill="url(#RadialGradient1)" />
+      <circle cx={x} cy={y} r={r || 10} fill="url(#RadialGradient1)" fillOpacity="0.5" />
     </svg>
   )
 };
