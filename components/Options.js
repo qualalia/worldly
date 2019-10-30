@@ -1,8 +1,8 @@
 import React from 'react';
 import Circle from './Circle.js';
-import Star from './Star.js';
+import Square from './Square.js';
 
-const SHAPES = ['circle', 'star'];
+const SHAPES = ['circle', 'square'];
 
 const Options = (props) => {
   const { handleChange, sizeValue, shapeValue } = props;
@@ -32,7 +32,7 @@ const Options = (props) => {
       </div>
       <div className="option">
 	<div className="demo">
-	  {(shapeValue === 'circle') ? <Circle x={60} y={70} r={sizeValue} /> : <Star />}
+	  {(shapeValue === 'circle') ? <Circle x={60} y={70} r={sizeValue} /> : <Square x={60} y={70} r={sizeValue} />}
 	</div>
       </div>
     </div>
