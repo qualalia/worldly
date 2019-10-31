@@ -31,15 +31,6 @@ router.get('/', (req, res, next) => {
   }
 });
 
-/*router.get('/stickers', (req, res, next) => {
-  try {
-    res.sendFile(path.join(__dirname, '../components/'));
-  }
-  catch (err) {
-    next(err);
-  }
-});*/
-
 router.use((req, res, next) => {
   const err = new Error('Route not found!')
   err.status = 404
