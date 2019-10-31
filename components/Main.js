@@ -8,15 +8,30 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      size: 10,
+      size: 20,
       shape: 'circle',
+      t: 0,
     }
+  }
+  componentDidMount() {
+    this.timerId = setInterval(
+      () => this.tick(),
+      16
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
   }
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
+  tick = () => {
+    this.setState({
+      t: this.state.t + 0.02,
+    });
+  }
   render() {
-    const { size, shape } = this.state;
+    const { size, shape, t } = this.state;
     return (
       <BrowserRouter>
 	<nav>
@@ -30,30 +45,21 @@ class Main extends React.Component {
 	  </NavLink>
 	</nav>
 	<div className="body-container">
-	  <Route exact path="/stickers.js"
+	  <Route exact path="/stickers"
 		 render={() =>
 		   <div>
-		     <Stickers />
+		     <Stickers t={t}
+			shape={shape}
+			size={size}/>
 		     <Options handleChange={this.handleChange}
-					   sizeValue={size}
-					   shapeValue={shape}
+			sizeValue={size}
+			shapeValue={shape}
 		     />
 		   </div>
 		 } />
 	  <Route exact path="/space"
-		 render={() => <Space />} />
+		 render={() => <Space tick={this.tick}/>} />
 	</div>
-
-	{/* 	<div className="body-container">
-	    <Stickers shape={shape}
-	    size={size}
-	    />
-	    <Space />
-	    <Options handleChange={this.handleChange}
-	    sizeValue={size}
-	    shapeValue={shape}
-	    />
-	    </div> */}
       </BrowserRouter>
     )
   }
