@@ -11,10 +11,10 @@ const testBodies = [
   { x: 800, y: 540 },
   { x: 1200, y: 540 },
 ];
+for (let i = 0; i < 200; i++)
+  celestialBkg.push({ x: Math.random() * 4000, y: Math.random() * 900 });
 
-for (let i = 0; i < 500; i++)
-  celestialBkg.push({ x: Math.random() * 5000, y: Math.random() * 900 });
-
+// SPACE
 export default class Space extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,15 @@ export default class Space extends React.Component {
       t: 0,
       px: 700,
       py: 400,
+      up: false,
+      down: false,
+      left: false,
+      right: false,
     };
+    this.v_x = 0;
+    this.v_y = 0;
+    this.a_x = 0;
+    this.a_y = 0;
   }
   componentDidMount() {
     this.timerId = setInterval(
@@ -39,40 +47,69 @@ export default class Space extends React.Component {
     const event = e || window.e;
     let dx = 0;
     let dy = 0;
-    if (['ArrowLeft', 'a'].includes(event.key))
+    if (['ArrowLeft', 'a'].includes(event.key)) {
       dx = -10;
-    else if (['ArrowRight', 'd', 'e'].includes(event.key))
+      this.setState({ left: true });
+    }
+    else if (['ArrowRight', 'd', 'e'].includes(event.key)) {
       dx = 10;
-    else if (['ArrowUp', 'w', ','].includes(event.key))
+      this.setState({ right: true });
+    }
+    else if (['ArrowUp', 'w', ','].includes(event.key)) {
       dy = -10;
-    else if (['ArrowDown', 'o', 's'].includes(event.key))
+      this.setState({ up: true });
+    }
+    else if (['ArrowDown', 'o', 's'].includes(event.key)) {
       dy = 10;
+      this.setState({ down: true });
+    }
     else {};
-    const bkgParallax = this.state.background.map(circle => ({
-      x: circle.x - (20), y: circle.y - (20)
-    }));
 
-    this.setState({
-      px: this.state.px + dx,
-      py: this.state.py + dy,
-      background: [
-	...this.state.background,
-	bkgParallax,
-      ],
-    });
+    /*    this.setState({
+       px: this.state.px + dx,
+       py: this.state.py + dy,
+       background: [
+       ...this.state.background,
+       bkgParallax,
+       ],
+       });*/
     
   }
   handleKeyUp = (e) => {
     console.log('key up');
-  }
-  
-  handleClick = (evt) => {
-    console.log('in focus');
+    this.setState({
+      left: false,
+      right: false,
+      up: false,
+      down: false,
+    });
   }
   
   tick() {
     this.setState({
       t: this.state.t + 0.02,
+    });
+    const { left, right, up, down, t } = this.state;
+    if (left) {
+      this.v_x = -t/20;
+      this.a_x = -1;
+    }
+    if (right) {
+      this.v_x = t/20;
+      this.a_x = 1;
+    }
+    if (up) {
+      this.v_y = -t/20;
+      this.a_y = -1;
+    }
+    if (down) {
+      this.v_y = t/2;
+      this.a_y = 1;
+    }
+    
+    this.setState({
+      px: this.state.px + this.v_x + this.a_x,
+      py: this.state.py + this.v_y + this.a_y,
     });
   }
   render() {
@@ -86,12 +123,12 @@ export default class Space extends React.Component {
 	   onKeyUp={this.handleKeyUp}
       >
 	<svg>
-	  <Planet x={px} y={py} t={t} />
 	  {/*<rect x={0} y={0} width="100%" height="100%" fill="darkmagenta" fillOpacity="0.1" />*/}
 	  {background.map((circle, index) =>
 	    <Circle key={index}
-		    x={circle.x}
-		    y={circle.y}
+		    x={circle.x} y={circle.y}
+		    r={5}
+		    fill={"darkmagenta"}
 		    fillOpacity={0.5}
 	    />
 	  )}
@@ -103,6 +140,7 @@ export default class Space extends React.Component {
 		    fill={"orange"}
 	    />
 	  )}
+	  <Planet x={px} y={py} t={t} />
 	</svg>
       </div>
     )
