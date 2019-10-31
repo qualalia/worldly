@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Space from './Space.js';
 import Options from './Options.js';
+import Stickers from './Stickers.js';
 
 class Main extends React.Component {
   constructor() {
