@@ -76,7 +76,7 @@ export default class Stickers extends React.Component {
   render() {
     const { x, y, r, t } = this.state;
     return (
-      <div tabIndex="1"
+      <div tabIndex="2"
 	   className="svg-container"
 	   onMouseMove={this.handleMouseMove}
 	   onClick={this.handleClick}
