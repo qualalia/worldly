@@ -12,7 +12,7 @@ const Planet = (props) => {
           <stop offset="100%" stopColor="transparent" />
 	</radialGradient>
       </defs>
-      <circle cx={x + v_x(x)} cy={y + v_y(y)} r={20}
+      <circle cx={x} cy={y} r={20}
 	      fill="url(#RadialGradient1)"
       />
     </svg>

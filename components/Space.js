@@ -22,8 +22,8 @@ export default class Space extends React.Component {
       foreground: testBodies,
       background: celestialBkg,
       t: 0,
-      px: 700,
-      py: 400,
+      px: 700 + Math.cos(0) * Math.cos(0) * 2,
+      py: 400 + Math.cos(0) * Math.sin(0) * 2,
       up: false,
       down: false,
       left: false,
@@ -86,13 +86,14 @@ export default class Space extends React.Component {
   }
   
   tick() {
-    this.setState({
-      t: this.state.t + 0.02,
-    });
     const { left, right, up, down, t } = this.state;
     if (left) {
       this.v_x = -t/20;
       this.a_x = -1;
+    }
+    else {
+      this.v_x = 0;
+      this.a_x = 0.05;
     }
     if (right) {
       this.v_x = t/20;
@@ -108,6 +109,7 @@ export default class Space extends React.Component {
     }
     
     this.setState({
+      t: t + 0.02,
       px: this.state.px + this.v_x + this.a_x,
       py: this.state.py + this.v_y + this.a_y,
     });
