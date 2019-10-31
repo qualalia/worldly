@@ -8,37 +8,27 @@ export default class Stickers extends React.Component {
     this.state = {
       x: -20,
       y: 0,
-      r: props.size,
+      r: 0,
       circles: [],
-      squares: [], 
-      t: 0,
+      squares: [],
     };
   }
-  componentDidMount() {
-    this.timerId = setInterval(
-      () => this.tick(),
-      16
-    );
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerId);
-  }
-
   handleMouseMove = (evt) => {
-    const dx = (evt.clientX - this.state.x)
-       ? (evt.clientX - this.state.x)
-       : 0.1;
-       const dy = (evt.clientY - this.state.y)
-       ? (evt.clientY - this.state.y)
-       : 0.1;
-       const dtheta = 0;
-       this.setState({
-       x: evt.clientX - 10,// both -10 with no margins, (-45, -30) with 2rem
-       y: evt.clientY - 10,
-       dx: dx,
-       dy: dy,
-       r: this.props.size,
-       });
+    if (this.props.shape === "circle") {
+      this.setState({
+	x: evt.clientX - 8,// both -10 with no margins, (-45, -30) with 2rem
+	y: evt.clientY - 3,
+	r: this.props.size,
+      });
+    }
+    else {
+      this.setState({
+	x: evt.clientX - this.props.size/2 - 5,
+	y: evt.clientY - this.props.size/2 - 2,
+	r: this.props.size,
+	theta: 0,
+      });
+    }
   }
   handleClick = (evt) => {
     if (this.props.shape === 'circle') {
@@ -47,9 +37,7 @@ export default class Stickers extends React.Component {
 	  ...this.state.circles,
 	  { x: this.state.x,
 	    y: this.state.y,
-	    r: this.state.r,
-	    dx: this.state.dx,
-	    dy: this.state.dy,
+	    r: this.props.size,
 	  },
 	],
       });
@@ -61,53 +49,46 @@ export default class Stickers extends React.Component {
 	  { x: this.state.x,
 	    y: this.state.y,
 	    r: this.state.r,
-	    theta: this.state.t,
+	    theta: this.props.t,
+	    omega: Math.random() * 100,
 	  },
 	],
       });
     }
   }
-  
-  tick() {
-    this.setState({
-      t: this.state.t + 0.02,
-    });
+
+  tick = () => {
+    this.props.tick();
   }
   render() {
-    const { x, y, r, t } = this.state;
+    const { x, y, r, circles, squares } = this.state;
+    const { t } = this.props;
+    const shapeToPreview = this.props.shape;
     return (
       <div tabIndex="2"
 	   className="svg-container"
 	   onMouseMove={this.handleMouseMove}
 	   onClick={this.handleClick}
       >
-      <svg>
-      <rect x={0} y={0} width="100%" height="100%" fill="darkmagenta" fillOpacity="0.1" />
-      {background.map((circle, index) =>
-	<Circle key={index}
-	x={circle.x}
-		y={circle.y}
-		fillOpacity={0.5}
-	/>
-      )}
-      {(shapeToPreview === 'circle')
-     ? <circle cx={x} cy={y} r={r} fill="transparent" />
-     : <rect x={x} y={y} width={r} height={r} fill="transparent" />
-      }
-      {circles.map((circle,index) =>
-	<Circle key={index}
-		x={circle.x} y={circle.y}
-		r={circle.r} t={t}
-		dx={circle.dx} dy={circle.dy}
-	/>
-      )}
-      {squares.map((square,index) =>
-	<Square key={index}
-		x={square.x} y={square.y}
-		r={square.r}
-		theta={square.theta + t}
-	/>
-      )}
+	<svg>
+	  <rect x={0} y={0} width="100%" height="100%" fill="darkmagenta" fillOpacity="0.3" />
+	  {circles.map((circle,index) =>
+	    <Circle key={index}
+		    x={circle.x} y={circle.y}
+		    r={circle.r} t={t}
+		    fill="yellow"
+	    />
+	  )}
+	  {squares.map((square,index) =>
+	    <Square key={index}
+		    x={square.x} y={square.y}
+		    r={square.r} theta={square.theta + t * square.omega}
+	    />
+	  )}
+	  {(shapeToPreview === 'circle')
+	  ? <circle cx={x} cy={y+5} r={r-5} fill="yellow" fillOpacity={0.4} />
+	  : <rect x={x-5} y={y+5} width={r} height={r} fill="orange" fillOpacity={0.4}/>
+	  }
 	</svg>
       </div>
     )
