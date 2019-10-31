@@ -4,7 +4,6 @@ const Planet = (props) => {
   const { x, y, t } = props;
   const v_x = s => Math.cos(t*4) * Math.cos(t) * s/40;
   const v_y = s => Math.cos(t*4) * Math.sin(t) * s/40;
-  const a_x = s => -0.0005*t;
   return (
     <svg>
       <defs>
