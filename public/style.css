@@ -3,11 +3,19 @@ body {
     background-color: rgba(0,0,69,1);
 }
 
+nav {
+    position: absolute;
+    top: 97%;
+    left: 90%;
+    display: flex;
+    flex-direction: flex-start;
+    background: transparent;
+}
+
 svg {
     width: 100%;
     vertical-align: top;
     height: 100%;
-    border: 1px solid white;
 }
 
 label {
@@ -15,38 +23,59 @@ label {
     color: whitesmoke;
 }
 
+rect {
+    box-shadow: 0px 0px 7px white;
+}
+
 .svg-container {
-    height: 90vh;
+    height: 98vh;
 }
 
 .body-container {
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, rgba(0,0,69,0.1),black 60%, black);
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px white;
+}
+
+.option-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .option {
-//    border: 1px solid white;
-    padding: 0.5rem;
+    //    border: 1px solid white;
+    margin-top: -0.5rem;
     padding-right: 3rem;
     display: flex;
-    justify-content: space-around;
-    justify-content: center;
     align-items: center;
     max-width: 20rem;
 }
 
 .demo {
-    max-width: 10vw;
-    height: 10rem;
+    width: 15vw;
+    margin-left: -2rem;
+}
+
+.selected {
+    color: orange;
+}
+
+.selected:hover {
+    color: whitesmoke;
 }
 
 #options-bar {
     background: linear-gradient(transparent, rgba(0,0,69,1));
+    height: 5.5rem;
     position: absolute;
-    top: 81%;
-    left: 1%;
-    border: 2px solid rgba(0,0,0,1);
-    width: 30vw;
+    top: 85%;
+    border: 2px solid rgba(0,0,0,0.4);
+    width: 37vw;
+    max-width: 40vw;
     display: flex;
 }
