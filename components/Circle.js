@@ -9,11 +9,26 @@ export default class Circle extends React.PureComponent {
       <svg>
 	<defs>
 	  <radialGradient id="RadialGradient1">
-            <stop offset="70%" stopColor="white" />
-            <stop offset="100%" stopColor="transparent" />
+            <stop offset="70%" stopColor="gold" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0.4"/>
 	  </radialGradient>
+	  
+	  <filter id="dropshadow" height="120%">
+	    <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+	    <feComponentTransfer>
+	      <feFuncA type="linear" slope="0.9"/> 
+	    </feComponentTransfer>
+	    <feMerge> 
+	      <feMergeNode /> 
+	      <feMergeNode in="SourceGraphic"/>
+	    </feMerge>
+	  </filter>
 	</defs>
-	<circle cx={x} cy={y} r={r || 10} fill={fill || "url(#RadialGradient1)"} fillOpacity={fillOpacity || 1} />
+	<circle cx={x} cy={y} r={r || 20}
+	fill="url(#RadialGradient1)"
+	fillOpacity={fillOpacity || 1}
+	filter="url(#dropshadow)"
+	/>
       </svg>
     )
   }
