@@ -5,7 +5,8 @@
 			"main": "app.js",
 			"scripts": {
 						"test": "echo \"Error: no test specified\" && exit 1",
-						"start-dev": "webpack -w"
+						"start-server": "nodemon server/index.js -e html,js,css --ignore public",
+						"start-dev": "webpack -w & npm run start-server"
 			},
 			"keywords": [],
 			"author": "",
@@ -14,6 +15,9 @@
 						"babel-core": "^6.26.3",
 						"babel-polyfill": "^6.26.0",
 						"babel-preset-react": "^6.24.1",
+						"express": "^4.17.1",
+						"morgan": "^1.9.1",
+						"nodemon": "^1.19.4",
 						"react": "^16.11.0",
 						"react-dom": "^16.11.0",
 						"react-router-dom": "^5.1.2",
