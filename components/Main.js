@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Space from './Space.js';
 import Options from './Options.js';
 
@@ -16,15 +17,43 @@ class Main extends React.Component {
   render() {
     const { size, shape } = this.state;
     return (
-      <div className="body-container">
-	<Space shape={shape}
-	       size={size}
-	/>
-	<Options handleChange={this.handleChange}
-		 sizeValue={size}
-		 shapeValue={shape}
-	/>
-      </div>
+      <BrowserRouter>
+	<nav>
+	  <NavLink exact to="/stickers"
+		   activeClassName="selected">
+	    Stickers
+	  </NavLink>
+	  <NavLink exact to="/space"
+		   activeClassName="selected">
+	    Space
+	  </NavLink>
+	</nav>
+	<div className="body-container">
+	  <Route exact path="/stickers.js"
+		 render={() =>
+		   <div>
+		     <Stickers />
+		     <Options handleChange={this.handleChange}
+					   sizeValue={size}
+					   shapeValue={shape}
+		     />
+		   </div>
+		 } />
+	  <Route exact path="/space"
+		 render={() => <Space />} />
+	</div>
+
+	{/* 	<div className="body-container">
+	    <Stickers shape={shape}
+	    size={size}
+	    />
+	    <Space />
+	    <Options handleChange={this.handleChange}
+	    sizeValue={size}
+	    shapeValue={shape}
+	    />
+	    </div> */}
+      </BrowserRouter>
     )
   }
 };
