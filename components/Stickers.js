@@ -16,15 +16,15 @@ export default class Stickers extends React.Component {
   handleMouseMove = (evt) => {
     if (this.props.shape === "circle") {
       this.setState({
-	x: evt.clientX - 8,// both -10 with no margins, (-45, -30) with 2rem
-	y: evt.clientY - 3,
-	r: this.props.size,
+	x: evt.clientX + 12,// both -10 with no margins, (-45, -30) with 2rem
+	y: evt.clientY + 8,
+	r: this.props.size - 4,
       });
     }
     else {
       this.setState({
-	x: evt.clientX - this.props.size/2 - 5,
-	y: evt.clientY - this.props.size/2 - 2,
+	x: evt.clientX - this.props.size/2 + 12,
+	y: evt.clientY - this.props.size/2 + 8,
 	r: this.props.size,
 	theta: 0,
       });
@@ -86,8 +86,8 @@ export default class Stickers extends React.Component {
 	    />
 	  )}
 	  {(shapeToPreview === 'circle')
-	  ? <circle cx={x} cy={y+5} r={r-5} fill="yellow" fillOpacity={0.4} />
-	  : <rect x={x-5} y={y+5} width={r} height={r} fill="orange" fillOpacity={0.4}/>
+	  ? <circle cx={x} cy={y} r={r-5} fill="yellow" fillOpacity={0.4} />
+	  : <rect x={x} y={y} width={r} height={r} fill="orange" fillOpacity={0.4}/>
 	  }
 	</svg>
       </div>
