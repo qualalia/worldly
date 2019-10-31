@@ -9,7 +9,7 @@ export default class Circle extends React.PureComponent {
       <svg>
 	<defs>
 	  <radialGradient id="RadialGradient1">
-            <stop offset="70%" stopColor="gold" />
+            <stop offset="70%" stopColor={fill || "gold"} />
             <stop offset="100%" stopColor="transparent" stopOpacity="0.4"/>
 	  </radialGradient>
 	  
