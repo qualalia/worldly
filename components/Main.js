@@ -58,7 +58,7 @@ class Main extends React.Component {
 		   </div>
 		 } />
 	  <Route exact path="/space"
-		 render={() => <Space tick={this.tick}/>} />
+		 render={() => <Space />} />
 	</div>
       </BrowserRouter>
     )
