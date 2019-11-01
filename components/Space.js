@@ -13,6 +13,8 @@ const testBodies = [
 ];
 for (let i = 0; i < 200; i++)
   celestialBkg.push({ x: Math.random() * 4000, y: Math.random() * 900 });
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 // SPACE
 export default class Space extends React.Component {
@@ -22,8 +24,8 @@ export default class Space extends React.Component {
       foreground: testBodies,
       background: celestialBkg,
       t: 0,
-      px: 700 + Math.cos(0) * Math.cos(0) * 2,
-      py: 400 + Math.cos(0) * Math.sin(0) * 2,
+      x: width/2, //+ Math.cos(0) * Math.cos(0) * 2,
+      y: height/2, //+ Math.cos(0) * Math.sin(0) * 2,
       up: false,
       down: false,
       left: false,
@@ -75,47 +77,48 @@ export default class Space extends React.Component {
        });*/
     
   }
-  handleKeyUp = (e) => {
-    console.log('key up');
+
+  tick() {
+    const { x, y, left, right, up, down, t } = this.state;
+    if (left) {
+      this.v_x = -t;
+      this.a_x = 0.05;
+    }
+    
+    if (right) {
+      this.v_x = Math.log(t) / Math.sqrt(t);
+      this.a_x = 0;
+    }
+
+    if (up) {
+      this.v_y = -t/2;
+      this.a_y = 0.2;
+    }
+
+    if (down) {
+      this.v_y = t/2;
+      this.a_y = -0.2;
+    }
+    
+    if (x >= width || x <= 0) {
+      this.v_x = -1 * this.v_x;
+    }
+    if (y >= height || y <= 0) {
+      this.v_y = -1 * this.v_y;
+    }
+
     this.setState({
+      t: t + 0.02,
+      x: this.state.x + this.v_x + this.a_x,
+      y: this.state.y + this.v_y + this.a_y,
       left: false,
       right: false,
       up: false,
       down: false,
     });
   }
-  
-  tick() {
-    const { left, right, up, down, t } = this.state;
-    if (left) {
-      this.v_x = -t/20;
-      this.a_x = -1;
-    }
-    else {
-      this.v_x = 0;
-      this.a_x = 0.05;
-    }
-    if (right) {
-      this.v_x = t/20;
-      this.a_x = 1;
-    }
-    if (up) {
-      this.v_y = -t/20;
-      this.a_y = -1;
-    }
-    if (down) {
-      this.v_y = t/2;
-      this.a_y = 1;
-    }
-    
-    this.setState({
-      t: t + 0.02,
-      px: this.state.px + this.v_x + this.a_x,
-      py: this.state.py + this.v_y + this.a_y,
-    });
-  }
   render() {
-    const { px, py, t, background, foreground } = this.state;
+    const { x, y, t, background, foreground } = this.state;
     return (
       <div tabIndex="1"
 	   className="svg-container"
@@ -124,7 +127,7 @@ export default class Space extends React.Component {
 	   onKeyDown={this.handleKeyDown}
 	   onKeyUp={this.handleKeyUp}
       >
-	<svg>
+	<svg width={window.innerWidth} height={window.innerHeight}>
 	  {/*<rect x={0} y={0} width="100%" height="100%" fill="darkmagenta" fillOpacity="0.1" />*/}
 	  {background.map((circle, index) =>
 	    <Circle key={index}
@@ -142,7 +145,7 @@ export default class Space extends React.Component {
 		    fill={"orange"}
 	    />
 	  )}
-	  <Planet x={px} y={py} t={t} />
+	  <Planet x={x} y={y} t={t} />
 	</svg>
       </div>
     )
