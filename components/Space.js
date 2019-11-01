@@ -22,6 +22,7 @@ export default class Space extends React.Component {
       down: false,
       left: false,
       right: false,
+      toggleParallax: false,
     };
   }
   componentDidMount() {
@@ -48,6 +49,12 @@ export default class Space extends React.Component {
       this.setState({ down: true });
     }
     else {};
+  }
+  handleCheckbox = (e) => {
+    const { name } = e.target;
+    this.setState({
+      toggleParallax: !this.state.toggleParallax,
+    });
   }
 
   tick() {
@@ -76,17 +83,18 @@ export default class Space extends React.Component {
 	v_y: this.state.v_y + this.state.a_y,
       })
     }
-    if (x >= window.innerWidth-10 || x <= 20) {
+    if (x >= window.innerWidth || x <= 20) {
       this.setState({
 	v_x: this.state.v_x * -1,
       })
     }
-    if (y >= window.innerHeight-10 || y <= 10) {
+    if (y >= window.innerHeight-10 || y <= 7) {
       this.setState({
 	v_y: this.state.v_y * -1,
       })
     }
-    if ((this.state.v_x <= 0.5 && this.state.v_x >= -0.5) && (this.state.v_y <= 0.5 && this.state.v_y >= -0.5)) { // small enough velocity
+    if ((this.state.v_x <= 0.5 && this.state.v_x >= -0.5) &&
+	(this.state.v_y <= 0.5 && this.state.v_y >= -0.5)) { // small enough velocity
       this.setState({
 	x: this.state.x + Math.cos(t*4) * Math.cos(t),
 	y: this.state.y + Math.cos(t*4) * Math.sin(t),
@@ -98,10 +106,12 @@ export default class Space extends React.Component {
 	y: y + this.state.v_y,
       });
     }
-    bkg = bkg.map(star => ({
-      x: star.x - this.state.v_x/40,
-      y: star.y - this.state.v_y/40,
-    }))
+    if (this.state.toggleParallax) {
+      bkg = bkg.map(star => ({
+	x: star.x - this.state.v_x/30,
+	y: star.y - this.state.v_y/30,
+      }))
+    }
     this.setState({
       t: t + 0.02,
       left: false,
@@ -113,24 +123,34 @@ export default class Space extends React.Component {
   render() {
     const { x, y, t, v_x, v_y } = this.state;
     return (
-      <div tabIndex="1"
-	   className="svg-container"
-	   onMouseMove={this.handleMouseMove}
-	   onClick={this.handleClick}
-	   onKeyDown={this.handleKeyDown}
-	   onKeyUp={this.handleKeyUp}
-      >
-	<svg width={window.innerWidth} height={window.innerHeight}>
-	  {bkg.map((circle, index) =>
-	    <Circle key={index}
-		    x={circle.x} y={circle.y}
-		    r={5}
-		    fill={"darkmagenta"}
-		    fillOpacity={0.5}
-	    />
-	  )}
-	  <Planet x={x} y={y} t={t} />
-	</svg>
+      <div>
+	<div tabIndex="1"
+	     className="svg-container"
+	     onMouseMove={this.handleMouseMove}
+	     onClick={this.handleClick}
+	     onKeyDown={this.handleKeyDown}
+	     onKeyUp={this.handleKeyUp}
+	>
+	  <svg width={window.innerWidth} height={window.innerHeight}>
+	    {bkg.map((circle, index) =>
+	      <Circle key={index}
+		      x={circle.x} y={circle.y}
+		      r={5}
+		      fill={"darkmagenta"}
+		      fillOpacity={0.5}
+	      />
+	    )}
+	    <Planet x={x} y={y} t={t} />
+	  </svg>
+	</div>
+	<div className="checkbox">
+	  <label htmlFor="toggleParallax">Parallax On</label>
+	  <input type="checkbox"
+		 name="toggleParallax"
+		 checked={this.state.toggleParallax}
+		 onChange={this.handleCheckbox}
+	  />
+	</div>
       </div>
     )
 }
