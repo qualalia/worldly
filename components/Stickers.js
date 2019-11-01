@@ -38,6 +38,7 @@ export default class Stickers extends React.Component {
 	  { x: this.state.x,
 	    y: this.state.y,
 	    r: this.props.size,
+	    theta: this.props.t,
 	  },
 	],
       });
@@ -75,7 +76,7 @@ export default class Stickers extends React.Component {
 	  {circles.map((circle,index) =>
 	    <Circle key={index}
 		    x={circle.x} y={circle.y}
-		    r={circle.r} t={t}
+		    r={circle.r} t={(circle.theta + t/circle.r*60)%360}
 		    fill="yellow"
 	    />
 	  )}
