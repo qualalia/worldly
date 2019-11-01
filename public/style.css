@@ -62,8 +62,9 @@ label {
 }
 
 .demo {
-    width: 15vw;
+    width: 35vw;
     margin-left: -2rem;
+    height: 6rem;
 }
 
 .selected {
