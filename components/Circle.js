@@ -24,15 +24,13 @@ export default class Circle extends React.PureComponent {
 	    </feMerge>
 	  </filter>
 	</defs>
-	<circle cx={x} cy={y} r={r || 20}
-		fill="url(#RadialGradient1)"
-		fillOpacity={fillOpacity || 1}
-		filter="url(#dropshadow)"
+	<circle cx={x + movementX*1.5 } cy={y + movementY*1.5 }
+	r={r/6 || 5} filter="url(#dropshadow)"
+	fill="url(#RadialGradient1)" fillOpacity={fillOpacity || 1}
 	/>
-	<circle cx={x + movementX*1.5 } cy={y + movementY*1.5 } r={r/6 || 5}
-		fill="url(#RadialGradient1)"
-		fillOpacity={fillOpacity || 1}
-		filter="url(#dropshadow)"
+	<circle cx={x} cy={y}
+	r={r || 20} filter="url(#dropshadow)"
+	fill="url(#RadialGradient1)" fillOpacity={fillOpacity || 1}
 	/>
       </svg>
     )
