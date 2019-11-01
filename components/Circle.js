@@ -3,8 +3,6 @@ import React from 'react';
 export default class Circle extends React.PureComponent {
   render () {
     const { x, y, r, fill, fillOpacity } = this.props;
-    const v_x = s => s + s;
-    const a_x = s => 0;
     return (
       <svg>
 	<defs>
@@ -25,9 +23,9 @@ export default class Circle extends React.PureComponent {
 	  </filter>
 	</defs>
 	<circle cx={x} cy={y} r={r || 20}
-	fill="url(#RadialGradient1)"
-	fillOpacity={fillOpacity || 1}
-	filter="url(#dropshadow)"
+		fill="url(#RadialGradient1)"
+		fillOpacity={fillOpacity || 1}
+		filter="url(#dropshadow)"
 	/>
       </svg>
     )
