@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Planet = (props) => {
-  const { x, y, t } = props;
-  const v_x = s => 0 //Math.cos(t*4) * Math.cos(t) * s/10;
-  const v_y = s => 0 //Math.cos(t*4) * Math.sin(t) * s/10;
+  const { x, y } = props;
   return (
     <svg>
       <defs>
@@ -12,7 +10,7 @@ const Planet = (props) => {
           <stop offset="100%" stopColor="transparent" />
 	</radialGradient>
       </defs>
-      <circle cx={x + v_x(x)} cy={y + v_y(y)} r={20}
+      <circle cx={x} cy={y} r={20}
 	      fill="url(#RadialGradient2)"
       />
     </svg>
