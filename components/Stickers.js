@@ -77,7 +77,7 @@ export default class Stickers extends React.Component {
 	    <Circle key={index}
 		    x={circle.x} y={circle.y}
 		    r={circle.r} t={(circle.theta + t/circle.r*60)%360}
-		    fill="yellow"
+		    fill="gold"
 	    />
 	  )}
 	  {squares.map((square,index) =>
@@ -87,7 +87,7 @@ export default class Stickers extends React.Component {
 	    />
 	  )}
 	  {(shapeToPreview === 'circle')
-	  ? <circle cx={x} cy={y} r={r-5} fill="yellow" fillOpacity={0.4} />
+	  ? <circle cx={x} cy={y} r={r-5} fill="gold" fillOpacity={0.4} />
 	  : <rect x={x} y={y} width={r} height={r} fill="orange" fillOpacity={0.4}/>
 	  }
 	</svg>
