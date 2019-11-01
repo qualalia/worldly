@@ -35,8 +35,8 @@ const Options = (props) => {
       <div className="option">
 	<div className="demo">
 	  {(shapeValue === 'circle')
-	  ? <Circle x={50} y={80} r={sizeValue} />
-	  : <Square x={50 - sizeValue/2} y={80 - sizeValue/2} r={sizeValue} />}
+	  ? <Circle x={40} y={50} r={sizeValue} />
+	  : <Square x={50 - sizeValue/2} y={50 - sizeValue/2} r={sizeValue} />}
 	</div>
       </div>
     </div>
