@@ -61,24 +61,24 @@ export default class Space extends React.Component {
     if (left) {
       this.setState({
 	a_x: -1,
-	v_x: Math.min(this.state.v_x + 3/5 * this.state.a_x, 10),
+	v_x: Math.min(this.state.v_x + this.state.a_x, 10),
       })
     }
     if (right) {
       this.setState({
 	a_x: 1,
-	v_x: Math.min(this.state.v_x + 3/5 * this.state.a_x, 10),
+	v_x: Math.min(this.state.v_x + this.state.a_x, 10),
       })
     }
     if (up) {
       this.setState({
-	a_y: -1,
+	a_y: -0.3,
 	v_y: Math.min(this.state.v_y + this.state.a_y, 10),
       })
     }
     if (down) {
       this.setState({
-	a_y: 1,
+	a_y: 0.3,
 	v_y: Math.min(this.state.v_y + this.state.a_y, 10),
       })
     }
@@ -132,14 +132,13 @@ export default class Space extends React.Component {
 		    fillOpacity={0.5}
 	    />
 	  )}
-	  {fg.map((el, index) =>
+	  {/*fg.map((el, index) =>
 	    <Circle key={index}
-		    x={el.x}
-		    y={el.y}
+		    x={el.x} y={el.y}
 		    r={15}
 		    fill={"yellow"}
 	    />
-	  )}
+	  )*/}
 	  <Planet x={x} y={y} t={t} />
 	</svg>
       </div>
