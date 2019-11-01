@@ -2,16 +2,15 @@ import React from 'react';
 import Circle from './Circle.js';
 import Planet from './Planet.js';
 
-const celestialBkg = [];
-for (let i = 0; i < 200; i++)
-  celestialBkg.push({ x: Math.random() * 4000, y: Math.random() * 1200 });
+let bkg = [];
+for (let i = 0; i < 100; i++)
+  bkg.push({ x: Math.random() * (window.innerWidth + 20), y: Math.random() * (window.innerHeight + 20) });
 
 // SPACE
 export default class Space extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bkg: celestialBkg,
       t: 0,
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
@@ -67,22 +66,22 @@ export default class Space extends React.Component {
     }
     if (up) {
       this.setState({
-	a_y: -0.3,
+	a_y: -0.5,
 	v_y: this.state.v_y + this.state.a_y,
       })
     }
     if (down) {
       this.setState({
-	a_y: 0.3,
+	a_y: 0.5,
 	v_y: this.state.v_y + this.state.a_y,
       })
     }
-    if (x >= window.innerWidth || x <= 0) {
+    if (x >= window.innerWidth-10 || x <= 20) {
       this.setState({
 	v_x: this.state.v_x * -1,
       })
     }
-    if (y >= window.innerHeight || y <= 10) {
+    if (y >= window.innerHeight-10 || y <= 10) {
       this.setState({
 	v_y: this.state.v_y * -1,
       })
@@ -99,7 +98,10 @@ export default class Space extends React.Component {
 	y: y + this.state.v_y,
       });
     }
-
+    bkg = bkg.map(star => ({
+      x: star.x - this.state.v_x/40,
+      y: star.y - this.state.v_y/40,
+    }))
     this.setState({
       t: t + 0.02,
       left: false,
@@ -109,7 +111,7 @@ export default class Space extends React.Component {
     })
   }
   render() {
-    const { x, y, t, bkg, fg } = this.state;
+    const { x, y, t, v_x, v_y } = this.state;
     return (
       <div tabIndex="1"
 	   className="svg-container"
@@ -127,19 +129,9 @@ export default class Space extends React.Component {
 		    fillOpacity={0.5}
 	    />
 	  )}
-	  {/*fg.map((el, index) =>
-	    <Circle key={index}
-		    x={el.x} y={el.y}
-		    r={15}
-		    fill={"yellow"}
-	    />
-	  )*/}
 	  <Planet x={x} y={y} t={t} />
 	</svg>
       </div>
     )
-  }
+}
 };
-
-
-// gravity: G*m_1*m_2 / d^2 
