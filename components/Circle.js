@@ -3,8 +3,8 @@ import React from 'react';
 export default class Circle extends React.PureComponent {
   render () {
     const { x, y, r, t, fill, fillOpacity } = this.props;
-    const movementX = Math.cos(0.6*t)*Math.cos(t) * 40;
-    const movementY = Math.cos(0.6*t)*Math.sin(t) * 40;
+    const movementX = Math.cos(0.6*t)*Math.cos(t) * 40 || 0;
+    const movementY = Math.cos(0.6*t)*Math.sin(t) * 40 || 0;
     return (
       <svg>
 	<defs>
