@@ -75,6 +75,14 @@ label {
     color: whitesmoke;
 }
 
+.checkbox {
+    width: 7rem;
+    position: absolute;
+    top: 5%;
+    left: 89%;
+    display: flex;
+}
+
 #options-bar {
     background: linear-gradient(transparent, rgba(0,0,69,1));
     height: 6rem;
