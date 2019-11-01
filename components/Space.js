@@ -3,19 +3,14 @@ import Circle from './Circle.js';
 import Planet from './Planet.js';
 
 const celestialBkg = [];
-const testBodies = [
-  { x: 400, y: 180 },
-  { x: 800, y: 540 },
-];
 for (let i = 0; i < 200; i++)
-  celestialBkg.push({ x: Math.random() * 4000, y: Math.random() * 900 });
+  celestialBkg.push({ x: Math.random() * 4000, y: Math.random() * 1200 });
 
 // SPACE
 export default class Space extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fg: testBodies,
       bkg: celestialBkg,
       t: 0,
       x: window.innerWidth / 2,
@@ -60,26 +55,26 @@ export default class Space extends React.Component {
     const { x, y, left, right, up, down, t, fg } = this.state;
     if (left) {
       this.setState({
-	a_x: -1,
-	v_x: Math.min(this.state.v_x + this.state.a_x, 10),
+	a_x: -0.3,
+	v_x: this.state.v_x + this.state.a_x,
       })
     }
     if (right) {
       this.setState({
-	a_x: 1,
-	v_x: Math.min(this.state.v_x + this.state.a_x, 10),
+	a_x: 0.3,
+	v_x: this.state.v_x + this.state.a_x,
       })
     }
     if (up) {
       this.setState({
 	a_y: -0.3,
-	v_y: Math.min(this.state.v_y + this.state.a_y, 10),
+	v_y: this.state.v_y + this.state.a_y,
       })
     }
     if (down) {
       this.setState({
 	a_y: 0.3,
-	v_y: Math.min(this.state.v_y + this.state.a_y, 10),
+	v_y: this.state.v_y + this.state.a_y,
       })
     }
     if (x >= window.innerWidth || x <= 0) {
@@ -94,8 +89,8 @@ export default class Space extends React.Component {
     }
     if ((this.state.v_x <= 0.5 && this.state.v_x >= -0.5) && (this.state.v_y <= 0.5 && this.state.v_y >= -0.5)) { // small enough velocity
       this.setState({
-	x: this.state.x + Math.cos(t*4) * Math.cos(t) * x/300,
-	y: this.state.y + Math.cos(t*4) * Math.sin(t) * y/300,
+	x: this.state.x + Math.cos(t*4) * Math.cos(t),
+	y: this.state.y + Math.cos(t*4) * Math.sin(t),
       })
     }
     else {
